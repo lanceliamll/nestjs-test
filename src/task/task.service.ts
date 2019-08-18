@@ -77,6 +77,7 @@ export class TaskService {
     // return index;
 
     //#Third Solution
-    this.tasks = this.tasks.filter(task => task.id !== id);
+    const taskToBeDeleted = this.getTaskById(id);
+    this.tasks = this.tasks.filter(task => task.id !== taskToBeDeleted.id);
   }
 }

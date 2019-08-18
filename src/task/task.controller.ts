@@ -3,6 +3,7 @@ import { TaskService } from './task.service';
 import { Task, TaskStatus } from './task.model';
 import { CreateTaskDTO } from './dto/create-task.dto';
 import { GetTaskFilterDTO } from './dto/get-task-filter.dto';
+import { TaskStatusValidationPipe } from './pipes/task-validation-status.pipe';
 
 @Controller('task') //Represents localhost:3000/task
 export class TaskController {
@@ -35,7 +36,7 @@ export class TaskController {
 
   //@Patch update the status of the current task
   @Patch("/:id/status")
-  updateTaskStatus(@Param("id") id: string, @Body("status") status: TaskStatus): Task {
+  updateTaskStatus(@Param("id") id: string, @Body("status", TaskStatusValidationPipe) status: TaskStatus): Task {
     return this.taskService.updateTaskStatus(id, status);
   }
 
