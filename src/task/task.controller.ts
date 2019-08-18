@@ -13,8 +13,9 @@ export class TaskController {
 
   // GET by filter or without
   // localhost:5000/task?status=OPEN&search=somethinginthedescriptionortitle
+  // Added :ValidationPipe: to the Query anotation to make the nest js run the validation of GetTaskFilterDTO
   @Get()
-  getTasks(@Query() filterDto: GetTaskFilterDTO): Task[] {
+  getTasks(@Query(ValidationPipe) filterDto: GetTaskFilterDTO): Task[] {
     if (Object.keys(filterDto).length) {
       return this.taskService.getTasksWithFilters(filterDto);
     } else {
